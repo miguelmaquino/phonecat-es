@@ -1,0 +1,41 @@
+<!-- Vista: Lista de Teléfonos -->
+<div class="container-fluid">
+  <div class="row-fluid">
+    <!-- Sección Izquierda de la vista -->
+    <div class="span2">
+      <!-- Input de Búsqueda -->
+      Buscar: <input ng-model="busqueda"> <!-- Creamos un modélo llamado "busqueda" para las búsquedas -->
+
+      <!-- Opciones para ordenar los teléfonos -->
+      Ordenar por:
+      <!-- NOTA: "ng-model" dentro de un <select> ligará el valor de sus <option> al modelo;
+                 en este caso a "ordenarPor" -->
+      <select ng-model="ordenarPor"> <!-- Creamos un modélo llamado "ordenarPor" para ordenar los teléfonos -->
+        <option value="name">Alfabéticamente</option>
+        <option value="age">Más nuevo</option>
+      </select>
+    </div>
+
+    <!-- Sección Principal de la vista -->
+    <div class="span10">
+      <!-- Liísta de teléfonos-->
+      <ul class="phones">
+        <!-- "ng-repeat" Itéra el arreglo de "telefonos" -->
+        <!-- "filter" Filtra el arreglo de "telefonos" de acuerdo al modelo "busqueda" -->
+        <!-- "orderBy" Ordena el arreglo de "telefonos"  de acuerdo al modelo "ordenarPor" -->
+        <li ng-repeat="telefono in telefonos | filter:busqueda | orderBy:ordenarPor"
+            class="thumbnail phone-listing"> <!-- La clase "phone-listing" nos sirve para Animar los "teléfonos"-->
+          <!-- Imágen del teléfono (link a su detálle)-->
+          <a href="#/telefonos/{{telefono.id}}" class="thumb">
+            <!-- "ng-src" Previene que el browser evalue la expresión {{}} de forma Literal -->
+            <img ng-src="{{telefono.imageUrl}}">
+          </a>
+
+          <!-- Link para el detálle del teléfono -->
+          <a href="#/telefonos/{{telefono.id}}">{{telefono.name}}</a>
+          <p>{{telefono.snippet}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
